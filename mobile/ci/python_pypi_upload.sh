@@ -9,7 +9,7 @@ if [[ ! -f /.dockerenv ]]; then
     exec ./ci/run_envoy_docker.sh "bash -c 'cd mobile && bash ./ci/python_pypi_upload.sh'"
 fi
 
-bazel build -c opt --strip=always //library/python:envoy_mobile_wheel --//library/python:python_platform="manylinux2014_x86_64" --@rules_python//python/config_settings:python_version="3.13.1"
+bazel build -c opt --strip=always /source/envoy/mobile/library/python:envoy_mobile_wheel --/source/envoy/mobile/library/python:python_platform="manylinux2014_x86_64" --@rules_python//python/config_settings:python_version="3.13.1"
 
 python3 -m venv envoy_wheel_test
 
