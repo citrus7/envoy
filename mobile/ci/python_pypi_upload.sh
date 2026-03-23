@@ -6,10 +6,10 @@ if [[ ! -f /.dockerenv ]]; then
     echo "Re-executing python_pypi_upload.sh inside docker..."
     SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
     cd "${SCRIPT_DIR}/../.."
-    exec ./ci/run_envoy_docker.sh "bash -c 'cd mobile && ./ci/python_pypi_upload.sh'"
+    exec ./ci/run_envoy_docker.sh "bash -c 'cd mobile && bash ./ci/python_pypi_upload.sh'"
 fi
 
-bazel --bazelrc=../user.bazelrc build -c opt --strip=always //library/python:envoy_mobile_wheel --//library/python:python_platform="manylinux2014_x86_64" --@rules_python//python/config_settings:python_version="3.13.1"
+bazel build -c opt --strip=always //library/python:envoy_mobile_wheel --//library/python:python_platform="manylinux2014_x86_64" --@rules_python//python/config_settings:python_version="3.13.1"
 
 python3 -m venv envoy_wheel_test
 
